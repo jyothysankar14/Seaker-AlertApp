@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Metrics Dashboard</title>
+</head>
+<body>
+    <h1>System Metrics Dashboard</h1>
+
+    <h2>Latest Metrics</h2>
+    {% if latest_metric %}
+        <ul>
+            <li>Timestamp: {{ latest_metric.timestamp }}</li>
+            <li>CPU Usage: {{ latest_metric.cpu_usage }}%</li>
+            <li>RAM Usage: {{ latest_metric.ram_usage }} GB</li>
+            <li>Disk Space: {{ latest_metric.disk_space }} GB</li>
+            <li>Uptime: {{ latest_metric.uptime }} hours</li>
+        </ul>
+    {% else %}
+        <p>No metrics available.</p>
+    {% endif %}
+
+    <h2>Historical Metrics (Last 10 Records)</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>CPU Usage (%)</th>
+                <th>RAM Usage (GB)</th>
+                <th>Disk Space (GB)</th>
+                <th>Uptime (hours)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for metric in historical_metrics %}
+                <tr>
+                    <td>{{ metric.timestamp }}</td>
+                    <td>{{ metric.cpu_usage }}</td>
+                    <td>{{ metric.ram_usage }}</td>
+                    <td>{{ metric.disk_space }}</td>
+                    <td>{{ metric.uptime }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
